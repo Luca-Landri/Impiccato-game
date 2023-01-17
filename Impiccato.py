@@ -37,22 +37,23 @@ def word_guess(guess):
         return False
 
 def letter_guess(guess):
-    index = 0
-    for letter in word:
-        if letter == guess:
-            censored[index] = letter            
-        index += 1
+    for i in range(len(word)):
+        if guess == word[i]:
+            censored[i] = guess
+    print(word)
     return censored
-    
+
 def game():
+    attemmp = 5
+    print("_______________________________________________________")
+    print("Benvenuto nel gioco dell'impiccato!")
+    print("Il gioco consiste nel trovare la parola segreta, lettera per lettera.")
+    print("Se sbagli troppi tentativi, il gioco finisce e il tuo amico verrà impiccato!")
+    print("_______________________________________________________")
+
     while True:
-        attemmp = 0
-        print("_______________________________________________________")
-        print("Benvenuto nel gioco dell'impiccato!")
-        print("Il gioco consiste nel trovare la parola segreta, lettera per lettera.")
-        print("Se sbagli troppi tentativi, il gioco finisce e il tuo amico verrà impiccato!")
-        print("_______________________________________________________")
         print("La parola da indovinare è: ", *censored)
+        print("Hai ancora", attemmp, "tentativi")
         print("che parola è?")
         player_guess = input()
         if word_guess(player_guess):
@@ -63,7 +64,7 @@ def game():
             letter = input()
             letter_guess(letter)
             print(*censored)
-            attemmp += 1
+            attemmp -= 1
         if attemmp == 5:
             print("Hai finito i tentativi, il tuo amico verrà impiccato!")
             break
