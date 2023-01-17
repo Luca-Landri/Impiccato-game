@@ -1,8 +1,16 @@
 import csv
-csv_path = "Netflix-Shows/netflix_titles.csv"
+import random
 
-with open(csv_path, newline="") as csv_file:
-    csv_reader = csv.DictReader(csv_file, delimiter=' ', quotechar='|')
+# Funzione per la lettura del file csv
+def read_csv():
+    filtered = []
+    with open('./Dataset/netflix_titles.csv', encoding="utf8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["country"] == "Italy":
+                filtered.append(row["title"])
+    return filtered
 
-    for row in csv_reader:
-        print(row)
+Films = read_csv()
+
+print(Films)
