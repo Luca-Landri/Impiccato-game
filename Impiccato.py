@@ -1,7 +1,7 @@
 import csv
 import random
 
-# Funzione per la lettura del file csv
+# Function that reads the csv file and returns a list of films
 def read_csv():
     filtered = []
     with open('./Dataset/netflix_titles.csv', encoding="utf8") as f:
@@ -11,6 +11,7 @@ def read_csv():
                 filtered.append(row["title"])
     return filtered
 
+# Function that censors the word
 def censure_word(word):
     censored = ""
     for letter in word:
@@ -21,10 +22,12 @@ def censure_word(word):
         
     return censored
 
+# The function that chooses a random word from the list
 def random_word(films):
     word = random.choice(films)
     return word
 
+# The function that checks if the player has guessed the word
 def word_guess(guess):
     if guess == word:
         return True
