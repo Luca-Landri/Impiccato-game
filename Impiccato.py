@@ -1,5 +1,7 @@
 import csv
 import random
+player_guess = ""
+letter = ""
 
 # Function that reads the csv file and returns a list of films
 def read_csv():
@@ -13,12 +15,12 @@ def read_csv():
 
 # Function that censors the word
 def censure_word(word):
-    censored = ""
+    censored = []
     for letter in word:
         if letter == " ":
-            censored += " "
+            censored.append(" ")
         else:
-            censored += "_"
+            censored.append("_")
         
     return censored
 
@@ -33,28 +35,42 @@ def word_guess(guess):
         return True
     else:
         return False
+
+def letter_guess(guess):
+    index = 0
+    for letter in word:
+        if letter == guess:
+            censored[index] = letter            
+        index += 1
+    return censored
     
+def game():
+    while True:
+        attemmp = 0
+        print("_______________________________________________________")
+        print("Benvenuto nel gioco dell'impiccato!")
+        print("Il gioco consiste nel trovare la parola segreta, lettera per lettera.")
+        print("Se sbagli troppi tentativi, il gioco finisce e il tuo amico verrà impiccato!")
+        print("_______________________________________________________")
+        print("La parola da indovinare è: ", *censored)
+        print("che parola è?")
+        player_guess = input()
+        if word_guess(player_guess):
+            print("Hai indovinato!")
+        else:
+            print("Hai sbagliato!")
+            print("Prova ad indovinare una lettera")
+            letter = input()
+            letter_guess(letter)
+            print(*censored)
+            attemmp += 1
+        if attemmp == 5:
+            print("Hai finito i tentativi, il tuo amico verrà impiccato!")
+            break
+
 
 Films = read_csv()
 word = random_word(Films)
 print(word)
 censored = censure_word(word)
-attemp = 5
-player_guess = ""
-
-
-def game():
-    print("_______________________________________________________")
-    print("Benvenuto nel gioco dell'impiccato!")
-    print("Il gioco consiste nel trovare la parola segreta, lettera per lettera.")
-    print("Se sbagli troppi tentativi, il gioco finisce e il tuo amico verrà impiccato!")
-    print("_______________________________________________________")
-    print("La parola da indovinare è: ", censored)
-    print("Hai ", attemp, " tentativi", "che parola è?")
-    player_guess = input()
-    if word_guess(player_guess):
-        print("Hai indovinato!")
-
-
-
 game()
