@@ -27,43 +27,46 @@ def censure_word(word):
 # The function that chooses a random word from the list
 def random_word(films):
     word = random.choice(films)
-    return word
+    return word.lower()
 
 # The function that checks if the player has guessed the word
 def word_guess(guess):
-    if guess == word:
+    if guess == word.lower():
         return True
     else:
         return False
 
 def letter_guess(guess):
-    for i in range(len(word)):
-        if guess == word[i]:
-            censored[i] = guess
-    print(word)
-    return censored
+    while True:
+        if len(guess) > 1:
+            print("Inserisci una sola lettera!")
+        else:
+            for i in range(len(word)):
+                if guess == word[i]:
+                    censored[i] = guess
+            return censored
+            break
 
 def game():
     attemmp = 5
     print("_______________________________________________________")
     print("Benvenuto nel gioco dell'impiccato!")
     print("Il gioco consiste nel trovare la parola segreta, lettera per lettera.")
-    print("Se sbagli troppi tentativi, il gioco finisce e il tuo amico verrà impiccato!")
+    print("Se sbagli", attemmp, "tentativi, il gioco finisce e il tuo amico verrà impiccato!")
     print("_______________________________________________________")
 
     while True:
         print("La parola da indovinare è: ", *censored)
-        print("Hai ancora", attemmp, "tentativi")
-        print("che parola è?")
+        print("--Hai ancora", attemmp, "tentativi--")
+        print("--Prova ad indovinare la parola intera--")
         player_guess = input()
         if word_guess(player_guess):
-            print("Hai indovinato!")
+            print("--BRAVISSIMO, HAI INDOVINATO!--")
+            break
         else:
-            print("Hai sbagliato!")
-            print("Prova ad indovinare una lettera")
+            print("--Hai sbagliato!", "Prova ad indovinare una lettera--")
             letter = input()
             letter_guess(letter)
-            print(*censored)
             attemmp -= 1
         if attemmp == 5:
             print("Hai finito i tentativi, il tuo amico verrà impiccato!")
