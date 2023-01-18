@@ -48,7 +48,6 @@ def letter_guess(guess):
             break
 
 def game():
-    error = False
     attemmp = 5
     print("_______________________________________________________")
     print("Benvenuto nel gioco dell'impiccato!")
@@ -61,12 +60,8 @@ def game():
             print("La parola da indovinare è: ", *censored)
             print("--Hai ancora", attemmp, "tentativi--")
             print("--Prova ad indovinare la parola intera--")
-            while not error:
-                player_guess = input()
-                if len(player_guess) == 0:
-                    print("ERR: Non puoi lasciare il campo vuoto!")
-                else:
-                    error = True
+            player_guess = input()
+
             if word_guess(player_guess):
                 print("--BRAVISSIMO, HAI INDOVINATO!--")
                 break
