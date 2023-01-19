@@ -2,6 +2,7 @@ import csv
 import random
 player_guess = ""
 letter = ""
+try_list = []
 
 # Function that reads the csv file and returns a list of films
 def read_csv():
@@ -12,6 +13,11 @@ def read_csv():
             if row["country"] == "Italy":
                 filtered.append(row["title"])
     return filtered
+
+def try_list_guess(tentative):
+    try_list.append(tentative)
+
+    
 
 # Function that censors the word
 def censure_word(word):
@@ -58,7 +64,7 @@ def game():
     while True:
         if attemmp > 0:
             print("La parola da indovinare è: ", *censored)
-            print("--Hai ancora", attemmp, "tentativi--")
+            print("--Hai ancora", attemmp, "tentativi --", "lettere già estratte" , try_list)
             print("--Prova ad indovinare la parola intera--")
             player_guess = input()
 
@@ -69,6 +75,7 @@ def game():
                 print("--Hai sbagliato!", "Prova ad indovinare una lettera--")
                 letter = input()
                 letter_guess(letter)
+                try_list_guess(letter)
                 attemmp -= 1
         elif attemmp == 0:
             print("Hai finito i tentativi, il tuo amico verrà impiccato!")
